@@ -1,9 +1,17 @@
-SELECT T1.rest_id, rest_name, food_type, favorites, address, score
-FROM rest_info T1
-JOIN (
-    SELECT rest_id, ROUND(AVG(review_score),2) AS score 
-    FROM rest_review 
-    GROUP BY rest_id) T2
-ON T1.rest_id = T2.rest_id
-WHERE address LIKE '서울%'
-ORDER BY score DESC, favorites DESC
+select
+a.rest_id,
+a.rest_name,
+a.food_type,
+a.favorites,
+a.address,
+b.score
+from rest_info a
+join(
+    select 
+    rest_id, 
+    round(avg(review_score),2) as score
+    from rest_review 
+    group by rest_id) b
+on a.rest_id = b.rest_id
+where address like '서울%'
+order by b.score desc, a.favorites desc
