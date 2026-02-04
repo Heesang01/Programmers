@@ -1,2 +1,3 @@
 def solution(s):
-    return int(s)
+    if 1 <= len(s) <=5:
+        return int(s)
